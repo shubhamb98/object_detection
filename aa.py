@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from urllib.request import Request,urlopen
 import re
 import numpy as np
-from bb import scores,classes,category_index,image_np
+# scores,classes,category_index,image_np=bb.detectt()
 from PIL import Image
 def quote(topic):
     req = Request("https://www.brainyquote.com/topics/"+topic, headers={'User-Agent': 'Mozilla/5.0'})
@@ -17,7 +17,7 @@ def quote(topic):
     return cleantext
 
 
-def object_detect_lables():
+def object_detect_lables(scores,classes,category_index,image_np):
     final_score = np.squeeze(scores)
     count = 0
     for i in range(100):
@@ -31,13 +31,16 @@ def object_detect_lables():
 
           if(printcount == count):
                 break
+    im=Image.fromarray(image_np)
+    im.save('F:/New folder/models-master/models-master/research/object_detection/static/out.bmp')
+    im.show()
     return x
 
 
-xx=quote(object_detect_lables())
-
-for i in xx:
-    print(i)
-
-im=Image.fromarray(image_np)
-im.show()
+# xx=quote(object_detect_lables())
+#
+# for i in xx:
+#     print(i)
+#
+# im=Image.fromarray(image_np)
+# im.show()
